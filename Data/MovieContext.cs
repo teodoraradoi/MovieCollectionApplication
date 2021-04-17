@@ -14,5 +14,7 @@ namespace MovieCollectionApplication.Data
         }
 
         public DbSet<Movie> Movie { get; set; }
+        public DbSet<Review> Review { get; set; }
+
     }
 }

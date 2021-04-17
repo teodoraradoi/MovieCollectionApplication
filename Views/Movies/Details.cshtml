@@ -1,4 +1,4 @@
-﻿@model MovieCollectionApplication.Models.Movie
+﻿@model MovieCollectionApplication.Models.ViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -10,33 +10,90 @@
     <h4>Movie</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
+        <dt class="col-sm-2">
+            @Html.LabelFor(model => model.Movie.Title)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movie.Title)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ReleaseDate)
+        <dt class="col-sm-2">
+            @Html.LabelFor(model => model.Movie.ReleaseDate)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ReleaseDate)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movie.ReleaseDate)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Genre)
+        <dt class="col-sm-2">
+            @Html.LabelFor(model => model.Movie.Genre)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Genre)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movie.Genre)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
+        <dt class="col-sm-2">
+            @Html.LabelFor(model => model.Movie.Price)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Movie.Price)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Movie.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
+</div>
+
+<hr />
+<h4>Reviews</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Review
+            </th>
+            <th>
+                Review Date
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (Review review in Model.Reviews)
+        {
+            <tr>
+                <td>
+                    @review.Name
+                </td>
+                <td>
+                    @review.ReviewText
+                </td>
+                <td>
+                    @review.ReviewDate
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateReview" asp-route-id="@Model.Movie.Id">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="@Model.Review.Name" class="control-label"></label>
+                <input asp-for="@Model.Review.Name" class="form-control" />
+                <span asp-validation-for="@Model.Review.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Review.ReviewText" class="control-label"></label>
+                <input asp-for="@Model.Review.ReviewText" class="form-control" />
+                <span asp-validation-for="@Model.Review.ReviewText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit Review" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
 </div>

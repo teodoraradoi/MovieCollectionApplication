@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieCollectionApplication.Data;
 
 namespace MovieCollectionApplication.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    partial class MovieContextModelSnapshot : ModelSnapshot
+    [Migration("20210415131745_ReviewMigration")]
+    partial class ReviewMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,11 +73,9 @@ namespace MovieCollectionApplication.Migrations
 
             modelBuilder.Entity("MovieCollectionApplication.Models.Review", b =>
                 {
-                    b.HasOne("MovieCollectionApplication.Models.Movie", "Movie")
+                    b.HasOne("MovieCollectionApplication.Models.Movie", null)
                         .WithMany("Reviews")
                         .HasForeignKey("MovieId");
-
-                    b.Navigation("Movie");
                 });
 
             modelBuilder.Entity("MovieCollectionApplication.Models.Movie", b =>
